@@ -1,4 +1,5 @@
 import argparse
+import gzip
 
 def parse_args():
 	"""
