@@ -22,6 +22,15 @@ def parse_args():
 	args = parser.parse_args()
 	return args
 
+def file_test(vcf_file):
+	"""
+    This function checks if the input VCF file is gzip or not.
+    """
+	if vcf_file.endswith('.gz'):
+		return gzip.open, 'rbt'
+	else:
+		return open, 'rb'
+
 def parse_between(line, start, end):
 	try:
 		s_idx = line.find(start)+len(start)
@@ -41,7 +50,10 @@ def stats_from_row(line, stats):
 
 
 def extract_stats (stats, vcf, out):
-	with open(vcf, "rb") as vcf:
+
+	open_func, mode = file_test(vcf_file=vcf)
+	
+	with open_func(vcf, mode) as vcf:
 		stats = list(map(lambda l: stats_from_row(line=l, stats=stats), vcf))
 		out.write(b'\n'.join([b'\t'.join(s)for s in stats if s]))
 
