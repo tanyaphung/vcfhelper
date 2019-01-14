@@ -28,7 +28,7 @@ def file_test(vcf_file):
     This function checks if the input VCF file is gzip or not.
     """
 	if vcf_file.endswith('.gz'):
-		return gzip.open, 'rbt'
+		return gzip.open, 'rb'
 	else:
 		return open, 'rb'
 
