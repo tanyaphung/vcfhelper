@@ -44,7 +44,7 @@ def parse_between(line, start, end):
 
 
 def stats_from_row(line, stats):
-	if line.startswith(b'##'):
+	if line.startswith(b'#'):
 		return
 	stat_block = line.split(b"\t")[7]
 	return [parse_between(line=stat_block, start=s+b'=', end=b';') for s in stats]
