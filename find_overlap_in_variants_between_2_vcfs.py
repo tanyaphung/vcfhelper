@@ -27,7 +27,8 @@ def main():
         for line in f:
             if not line.startswith('#'):
                 items = line.rstrip('\n').split('\t')
-                vcf1_variants_set.add(items[1])
+                variants = items[0] + "_" + items[1]
+                vcf1_variants_set.add(variants)
 
     vcf2_variants_set = set()
     vcf2_open_func, vcf2_mode = file_test(vcf_file=args.input_vcf2)
@@ -35,7 +36,8 @@ def main():
         for line in f:
             if not line.startswith('#'):
                 items = line.rstrip('\n').split('\t')
-                vcf2_variants_set.add(items[1])
+                variants = items[0] + "_" + items[1]
+                vcf2_variants_set.add(variants)
 
     out = [str(len(vcf1_variants_set.intersection(vcf2_variants_set))), str(len(vcf1_variants_set-vcf2_variants_set)), str(len(vcf2_variants_set-vcf1_variants_set))]
     print('\t'.join(out))
