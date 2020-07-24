@@ -22,8 +22,8 @@ def file_test(vcf_file):
 def main():
     args = parse_args()
     vcf1_variants_set = set()
-    vcf1_open_func, vcf1_mode = file_test(vcf_file=args.input_vcf1)
-    with vcf1_open_func(args.input_vcf1, vcf1_mode) as f:
+    vcf1_open_func, vcf1_mode = file_test(vcf_file=args.vcf1)
+    with vcf1_open_func(args.vcf1, vcf1_mode) as f:
         for line in f:
             if not line.startswith('#'):
                 items = line.rstrip('\n').split('\t')
@@ -31,8 +31,8 @@ def main():
                 vcf1_variants_set.add(variants)
 
     vcf2_variants_set = set()
-    vcf2_open_func, vcf2_mode = file_test(vcf_file=args.input_vcf2)
-    with vcf2_open_func(args.input_vcf2, vcf2_mode) as f:
+    vcf2_open_func, vcf2_mode = file_test(vcf_file=args.vcf2)
+    with vcf2_open_func(args.vcf2, vcf2_mode) as f:
         for line in f:
             if not line.startswith('#'):
                 items = line.rstrip('\n').split('\t')
