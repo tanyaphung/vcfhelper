@@ -42,8 +42,5 @@ def main():
     out = [str(len(vcf1_variants_set.intersection(vcf2_variants_set))), str(len(vcf1_variants_set-vcf2_variants_set)), str(len(vcf2_variants_set-vcf1_variants_set))]
     print('\t'.join(out))
 
-    for i in vcf1_variants_set.intersection(vcf2_variants_set):
-        print(i)
-
 if __name__ == '__main__':
     main()
