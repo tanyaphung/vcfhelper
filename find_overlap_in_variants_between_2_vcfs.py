@@ -39,11 +39,24 @@ def main():
                 variants = items[0] + "_" + items[1]
                 vcf2_variants_set.add(variants)
 
+    # Set up output files
+    summary = open("overlap_summary.txt", "w")
+    header = ["overlap", "unique_to_vcf1", "unique_to_vcf2"]
+    print("\t".join(header), file=summary)
     out = [str(len(vcf1_variants_set.intersection(vcf2_variants_set))), str(len(vcf1_variants_set-vcf2_variants_set)), str(len(vcf2_variants_set-vcf1_variants_set))]
-    print('\t'.join(out))
+    print("\t".join(out), file=summary)
 
+    overlap = open("variants_overlap.txt", "w")
     for i in vcf1_variants_set.intersection(vcf2_variants_set):
-        print(i)
+        print(i, file=overlap)
+
+    unique_to_vcf1 = open("variants_unique_to_vcf1.txt", "w")
+    for i in (vcf1_variants_set-vcf2_variants_set):
+        print(i, file=unique_to_vcf1)
+
+    unique_to_vcf2 = open("variants_unique_to_vcf2.txt", "w")
+    for i in (vcf2_variants_set-vcf1_variants_set):
+        print(i, file=unique_to_vcf2)
 
 if __name__ == '__main__':
     main()
