@@ -37,10 +37,13 @@ def main():
         for line in f:
             if line.startswith("#CHROM"):
                 items = line.rstrip("\n").split("\t")
-                print("\t".join(items.pop(9)), file=outfile)
+                newline = [items[0], items[1], items[2], items[3], items[4], items[5], items[6], items[7], items[8], items[10]]
+                print("\t".join(newline), file=outfile)
             elif line.startswith("chr"):
                 items = line.rstrip("\n").split("\t")
-                print("\t".join(items.pop(9)), file=outfile)
+                newline = [items[0], items[1], items[2], items[3], items[4], items[5], items[6], items[7], items[8],
+                           items[10]]
+                print("\t".join(newline), file=outfile)
             else:
                 print(line.rstrip("\n"), file=outfile)
 
