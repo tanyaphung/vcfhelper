@@ -12,6 +12,10 @@ def parse_args():
         help="REQUIRED. Input the path to the input vcf file.")
 
     parser.add_argument(
+        "--sample_id", required=True,
+        help="REQUIRED. Input the sample id")
+
+    parser.add_argument(
         "--out_vcf", required=True,
         help="REQUIRED. Input the path to the output vcf file.")
 
@@ -37,7 +41,7 @@ def main():
         for line in f:
             if line.startswith("#CHROM"):
                 items = line.rstrip("\n").split()
-                newline = [items[0], items[1], items[2], items[3], items[4], items[5], items[6], items[7], items[8], items[10]]
+                newline = [items[0], items[1], items[2], items[3], items[4], items[5], items[6], items[7], items[8], args.sample_id]
                 print("\t".join(newline), file=outfile)
             elif line.startswith("chr"):
                 items = line.rstrip("\n").split()
